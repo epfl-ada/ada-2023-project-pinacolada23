@@ -36,7 +36,8 @@ Continuity of box office success:
 - frequency of release dates
 
 ## Proposed timeline
-
+```
+.
 o── 21.11.22 - 
 │  
 o── 23.11.22 - Optional: IMDb rating
@@ -56,7 +57,9 @@ o── 15.12.22 - Finalize code implementations and visualizations
 o── 18.12.23 - Perfection data story
 │  
 o 22.12.23 - Project milestone 3
+.
 
+```
 ## Organization within the team
 Same
 
