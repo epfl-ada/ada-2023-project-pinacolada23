@@ -12,28 +12,28 @@ This project aims to analyze the career trajectories of actors following their r
 
 ## Proposed additional datasets
 No other dataset used for now
-Optional: IMDb ratings, BAFTA (dataset pour oscar des acteurs) ?
+Optional: IMDb ratings, BAFTA
 
 ## Methods
 
 - Data pre-processing and cleaning:
-    - select relevant features: we decided to keep movies from the U.S. from the year 1980 and after
-    - handle missing data: remove 
-    - merge datasets
-
+    - Selecting relevant features: we decided to keep movies from the U.S. from the year 1980 and after
+    - Handling missing data: remove 
+    - Merging datasets
 - Statistical analysis: correlate box office revenue associated to movies from an actor with changes in roles
-
 - Data visualization: For clear representation of trends and patterns.
 - Machine Learning Techniques: Employing clustering algorithms to group actors based on similarities in their career paths post-hit.
 - Time-Series Analysis: Identifying patterns and anomalies over time in box office performance and role selection.
 
 Evolution in types of roles post-blockbuster: 
-- change in film genre
-- change in character type
+
+- Change in film genre
+- Change in character type
 
 Continuity of box office success: 
-- difference with subsequent box office revenues
-- frequency of release dates
+
+- Difference with subsequent box office revenues
+- Frequency of release dates
 
 ## Proposed timeline
 ```
