@@ -1,3 +1,5 @@
+import json
+
 # The goal of the file is to put all helpers that we use in the main notebook
 def sort_words(documents):
     words_list = []
@@ -44,3 +46,13 @@ def at_least_n_movies(pair):
     else:
         # Filter pair out of the dictionary
         return False  
+    
+
+# Define a function to extract genre names
+def extract_genre_names(row):
+    try:
+        genres_dict = json.loads(row)
+        genre_names = list(genres_dict.values())
+        return genre_names
+    except json.JSONDecodeError:
+        return None
