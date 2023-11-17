@@ -34,7 +34,7 @@ def create_words_database(l):
     return database
 
 # Define a function to filter the actor dictionary
-def at_least_n_movies(pair):
+def at_least_2_movies(pair):
     key, value = pair
     
     # Set the minimal number of movies played
