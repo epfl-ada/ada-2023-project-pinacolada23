@@ -1,4 +1,5 @@
 import json
+import ast
 
 # The goal of the file is to put all helpers that we use in the main notebook
 def sort_words(documents):
@@ -56,3 +57,12 @@ def extract_genre_names(row):
         return genre_names
     except json.JSONDecodeError:
         return None
+    
+
+# Define a function to safely parse the genre string
+def parse_genres(genre_string):
+    #TODO modif par diego psq il y a des cas bizarres
+    if genre_string == '{}':
+        return None 
+    # Safely evaluate the string as a dictionary and extract the values (which are the genres)
+    return list(ast.literal_eval(genre_string).values())
