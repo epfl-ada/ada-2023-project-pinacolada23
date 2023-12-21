@@ -142,9 +142,9 @@ def parse_genres(genre_string):
     Returns:
     - list or None: A list of genre names if parsing is successful, or None if the genre string is empty.
     """
-
     # Check if the genre string is empty
     if genre_string == '{}':
-        return None
+        genre_string = '{"no_genre": "No genre"}'
+        
     # Safely evaluate the string as a dictionary and extract the values (which are the genres)
     return list(ast.literal_eval(genre_string).values())
