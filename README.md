@@ -1,8 +1,8 @@
-# The Evolution of Actors Post-Blockbuster in the Film Industry
+# Blockbusters actors : Analysis of the evolution of actors careers post-blockbuster in the film industry
 
 ## Datastory
 
-TODO: put the link here with a small sentence
+This is the link of our data story: https://raphaellehartwig.github.io/lanyon/
 
 ## Abstract
 
