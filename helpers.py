@@ -132,7 +132,6 @@ def extract_genre_names(row):
 
     
 def parse_genres(genre_string):
-    #TODO modif par diego psq il y a des cas bizarres
     """
     Safely parses a genre string and extracts genre names.
 
@@ -140,7 +139,7 @@ def parse_genres(genre_string):
     - genre_string (str): A string representation of a dictionary containing genre information.
 
     Returns:
-    - list or None: A list of genre names if parsing is successful, or None if the genre string is empty.
+    - list: A list of genre names
     """
     # Check if the genre string is empty
     if genre_string == '{}':
@@ -148,3 +147,74 @@ def parse_genres(genre_string):
         
     # Safely evaluate the string as a dictionary and extract the values (which are the genres)
     return list(ast.literal_eval(genre_string).values())
+
+def center_on_first_hit(df, row):
+    """
+    Computes the position of the movie from the passed row with respect to the first big-hit of the passed
+
+    Args:
+    - df (Dataframe): Dataframe subset containing the movies (ordered in chronological order) played by a specific actor
+     - row (Series): One row of the passed df
+
+    Returns:
+    - float: the number representing the position of the row with respect to the passed df
+    """
+    # Function that return the position of the movie with respect to the fir big-hit (in chronological order)
+    
+    # Get the relative index of the row that is passed to the function with respect to the df
+    n_actual = df[(df.releaseDate == row.releaseDate) & (df.success == row.success)].index.values[0]-df.index.values[0]
+    # Get the number of movies before the first big-hit
+    n_big_hit = row.movie_count_before_hit
+
+    return n_actual - n_big_hit
+
+def dotproduct_similarity(c1, c2):
+    """
+    The dot product between two bags of words (i.e. counts the number of words that are the same)
+
+    Args:
+    - c1 (Counter): first bag of words
+    - c2 (Counter): second bag of words
+
+    Returns:
+    - float: The dot product between the two passed bags of words
+    """ 
+    all_genres = set(c1).union(c2)
+    dotproduct = sum(c1.get(g, 0) * c2.get(g, 0) for g in all_genres)
+    
+    return dotproduct
+    
+    
+def similarity_two_prev_movie(df, row):
+    """
+    Computes the mean similarity between the movie genres from the passed row and the movie genres from the two rows above (looking at the passed df).
+
+    Args:
+    - df (Dataframe): Dataframe subset containing the movies (ordered in chronological order) played by a specific actor
+    - row (Series): One row of the passed df
+
+    Returns:
+    - float or None: The mean similarity (using dotproduct_similarity function) between the movie of the passed row and the two previous movies in chronological order
+    """    
+    # Get the relative row index
+    row_index = df[(df.movieID == row.movieID)].index[0]-df.index[0]
+
+    # If it is the first movie of the considered actor then we cannot compute the wanted similarity
+    if row_index == 0:
+        return None
+
+    # Get the genres of the movie from the given row
+    current = row.genres
+    # Get the genres of the movie that comes before the one of the given row
+    prev_1 = df.iloc[row_index-1].genres
+
+    # If it is the second movie of the considered actor, then we perform the similarity using only the movie that comes before
+    if row_index == 1:
+        # Return the smimilarity using the previously defined similarity function
+        return dotproduct_similarity(prev_1, current)
+
+    # Get the genres of the second movie that comes before the one of the given row
+    prev_2 = df.iloc[row_index-2].genres
+
+    # Return the mean similarity unsing the previously defined similarity function
+    return 0.5*(dotproduct_similarity(prev_1, current)+dotproduct_similarity(prev_2, current))
