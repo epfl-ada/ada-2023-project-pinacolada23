@@ -267,8 +267,10 @@ def dotproduct_similarity_comp(c1, c2):
     # Calculate the magnitude (length) of the vectors
     magnitude_a = np.linalg.norm(c1)
     magnitude_b = np.linalg.norm(c2)
-
-    cosine_similarity = dot_product / (magnitude_a * magnitude_b)
+    if magnitude_a * magnitude_b == 0:
+        return 0 
+    else:
+        cosine_similarity = dot_product / (magnitude_a * magnitude_b)
 
     
     return cosine_similarity
