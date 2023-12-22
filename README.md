@@ -1,12 +1,15 @@
 # The Evolution of Actors Post-Blockbuster in the Film Industry
 
+## Datastory
+
+TODO: put the link here with a small sentence
+
 ## Abstract
 
-This project aims to analyze the career trajectories of actors following their roles in high-grossing films, using the CMU Movie Dataset as a primary resource. We're curious about how a significant box office success impacts an actor's subsequent choices and overall career path. Specifically, we intend to explore two dimensions: the evolution in the types of roles these actors undertake post-blockbuster, and the continuity of their box office success. This study seeks to find out patterns and trends in the film industry, providing insights into how a commercial success influence an actor's career decisions. By examining these aspects, we hope to understand and share the story of how sucess works in movie business and how it affects actors over time.
+This research project is designed to conduct a comprehensive analysis of the career trajectories of actors subsequent to their involvement in high-grossing films, utilizing the CMU Movie Dataset as the principal data source. The objective is to investigate the impact of significant box office success on an actor's subsequent professional choices and the trajectory of their career. The study will specifically focus on two key aspects: the progression in the variety of roles chosen by these actors after their blockbuster experiences, and the sustainability of their success at the box office. The aim is to identify patterns and trends within the film industry, shedding light on how commercial success influences the career decisions of actors. By delving into these dimensions, the project aspires to elucidate and articulate the narrative of success in the movie business and its enduring effects on actors' careers.
 
 
 ## Research questions
-
 - Does a high-grossing film consistently lead to continued box office success for its actors in their subsequent films?
 - Is there a noticeable change in the genre or type of characters portrayed by actors after a significant hit?
 - What are the long-term career impacts on actors who have starred in blockbuster hits?
