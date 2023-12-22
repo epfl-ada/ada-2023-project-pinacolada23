@@ -1,5 +1,6 @@
 import json
 import ast
+import numpy as np
 
 ### This file contains all helpers functions used in the notebooks ###
 
@@ -168,7 +169,7 @@ def center_on_first_hit(df, row):
 
     return n_actual - n_big_hit
 
-def dotproduct_similarity(c1, c2):
+def dotproduct_similarity_genre(c1, c2):
     """
     The dot product between two bags of words (i.e. counts the number of words that are the same)
 
@@ -211,10 +212,63 @@ def similarity_two_prev_movie(df, row):
     # If it is the second movie of the considered actor, then we perform the similarity using only the movie that comes before
     if row_index == 1:
         # Return the smimilarity using the previously defined similarity function
-        return dotproduct_similarity(prev_1, current)
+        return dotproduct_similarity_genre(prev_1, current)
 
     # Get the genres of the second movie that comes before the one of the given row
     prev_2 = df.iloc[row_index-2].genres
 
     # Return the mean similarity unsing the previously defined similarity function
-    return 0.5*(dotproduct_similarity(prev_1, current)+dotproduct_similarity(prev_2, current))
+    return 0.5*(dotproduct_similarity_genre(prev_1, current)+dotproduct_similarity_genre(prev_2, current))
+
+def similarity_two_prev_comp(df,row):
+    """
+    Computes the mean similarity between the compound from the passed row and the compound from the two rows above (looking at the passed df).
+
+    Args:
+    - df (Dataframe): Dataframe subset containing the movies (ordered in chronological order) played by a specific actor
+    - row (Series): One row of the passed df
+
+    Returns:
+    - float or None: The mean similarity (using dotproduct_similarity function) between the coumpound of the passed row and the two previous movies in chronological order
+    """    
+    row_index = df[(df.movieID == row.movieID)].index[0]-df.index[0]
+
+    if row_index == 0:
+        return None
+    
+    current = row.comp
+
+    prev_1 = df.iloc[row_index-1].comp
+
+    # If it is the second movie of the considered actor, then we perform the similarity using only the movie that comes before
+    if row_index == 1:
+        # Return the smimilarity using the previously defined similarity function
+        return dotproduct_similarity_comp(prev_1, current)
+    
+    prev_2 = df.iloc[row_index-2].comp
+
+    # Return the mean similarity unsing the previously defined similarity function
+    return 0.5*(dotproduct_similarity_comp(prev_1, current)+ dotproduct_similarity_comp(prev_2, current))
+
+
+def dotproduct_similarity_comp(c1, c2):
+    """
+    The dot product between two vectors
+    Args:
+    - c1 (Numpy): first vector comp
+    - c2 (Numpy): second vector comp
+
+    Returns:
+    - float: The dot product between the two vectors
+    """ 
+    # Calculate dot product
+    dot_product = np.dot(c1, c2)
+
+    # Calculate the magnitude (length) of the vectors
+    magnitude_a = np.linalg.norm(c1)
+    magnitude_b = np.linalg.norm(c2)
+
+    cosine_similarity = dot_product / (magnitude_a * magnitude_b)
+
+    
+    return cosine_similarity
