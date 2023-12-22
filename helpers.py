@@ -162,7 +162,7 @@ def center_on_first_hit(df, row):
     # Function that return the position of the movie with respect to the fir big-hit (in chronological order)
     
     # Get the relative index of the row that is passed to the function with respect to the df
-    n_actual = df[(df.releaseDate == row.releaseDate) & (df.success == row.success)].index.values[0]-df.index.values[0]
+    n_actual = df[(df.releaseDate == row.releaseDate) & (df.success == row.success) & (df.name_movie == row.name_movie)].index.values[0]-df.index.values[0]
     # Get the number of movies before the first big-hit
     n_big_hit = row.movie_count_before_hit
 
